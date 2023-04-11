@@ -21,16 +21,4 @@ public class ServletView extends HttpServlet{
 		
 		writer.close();
 	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/html;charset=UTF-8");
-		PrintWriter writer = resp.getWriter();
-		
-		writer.println("<html>");
-		writer.println("<head><title>서블릿 뷰</title></head>");
-		writer.println("<body><h2>jsp없이 직접 출력 post 방식</h2></body>");
-		writer.println("</html>");
-		
-		writer.close();
-	}
 }
