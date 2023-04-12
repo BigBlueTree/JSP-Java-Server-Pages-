@@ -67,5 +67,74 @@ public class MBoardDAO extends JDBConnPool{
       
       return bl;
    }
+public int insertWrite(MBoardDTO dto) {
+	int result=0;
+	String sql = "insert into fileboard(idx,name,title,content,ofile,nfile,pass)"
+			+ "values(seq_board_num.nextval,?,?,?,?,?,?)";
+		try {
+			psmt=con.prepareStatement(sql);
+			psmt.setString(1, dto.getName());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getOfile());
+			psmt.setString(5, dto.getNfile());
+			psmt.setString(6, dto.getPass());
+			result=psmt.executeUpdate();
+		} 	catch (Exception e) {
+			System.out.println("게시물 입력 중 예외");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public void updateVisitCount(String idx) {
+		String sql = "update fileboard set visitcount=visitcount+1" + "where idx=?";
+		try {
+			psmt=con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("조회수 증가 중 예외");
+			e.printStackTrace();
+		}
+	
+	}
+	public MBoardDTO getView(String idx) {
+		MBoardDTO dto = new MBoardDTO();
+		String sql = "select * from fileboard where idx=?";
+		try {
+			psmt=con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			rs=psmt.executeQuery();
+			if(rs.next()) {
+	            dto.setIdx(rs.getString("IDX"));
+	            dto.setName(rs.getString("NAME"));
+	            dto.setTitle(rs.getString("TITLE"));
+	            dto.setContent(rs.getString("CONTENT"));
+	            dto.setPostdate(rs.getDate("POSTDATE"));
+	            dto.setOfile(rs.getString("OFILE"));
+	            dto.setOfile(rs.getString("OFILE"));
+	            dto.setNfile(rs.getString("NFILE"));
+	            dto.setDowncount(rs.getInt("DOWNCOUNT"));
+	            dto.setVisitcount(rs.getInt("VISITCOUNT"));
+	            dto.setPass(rs.getString("PASS"));
+			}
+		} catch (Exception e) {
+			System.out.println("상세보기 중 예외");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	public void updateDowncount(String idx) {
+		String sql = "update fileboard set downcount=downcount+1 " + "where idx=?";
+		try {
+			psmt=con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("다운로드 수 증가 중 예외");
+			e.printStackTrace();
+		}
+		
+	}
 
 }
