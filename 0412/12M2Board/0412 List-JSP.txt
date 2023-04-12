@@ -51,7 +51,7 @@
    <c:otherwise>
       <c:forEach items="${boardList}" var="list" varStatus="stat">
          <tr align="center">
-            <td>${list.idx}</td>
+            <td>${stat.count}</td>
             <td align="center">
                <a href="../m2board/view.do?idx=${list.idx}">${list.title} </a> 
             </td>
@@ -61,7 +61,7 @@
             <td>
                <c:if test="${not empty list.ofile}">
                   <a href="../m2board/download.do?ofile=${list.ofile}
-                     &nfile=${list.ofile}&idx=${list.idx}">[${list.ofile}]
+                     &nfile=${list.nfile}&idx=${list.idx}">[${list.ofile}]
                   </a>
                </c:if>
             </td>
@@ -74,6 +74,7 @@
    <table border="1" width="90%">
       <tr align="center">
          <td>
+         	${map.pagingStr}
          </td>
          <td width="100">
             <button type="button" onclick="location.href='../m2board/write.do';">

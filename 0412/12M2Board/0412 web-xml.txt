@@ -103,4 +103,12 @@
   	<servlet-name>M2BoardList</servlet-name>
   	<url-pattern>/m2board/list.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>M2BoardWrite</servlet-name>
+  	<servlet-class>m2board.WriteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>M2BoardWrite</servlet-name>
+  	<url-pattern>/m2board/write.do</url-pattern>
+  </servlet-mapping>
 </web-app>
